@@ -100,6 +100,15 @@ def main() -> None:
         ),
         axis=1
     )
+    
+    merged["periodo"] = periodo  # columna con AAAAMM
+
+    merged["comision_calculada"] = merged["comision_calculada"].astype(float)
+
+    merged["pct_comision_sueldo"] = (
+        merged["comision_calculada"] / merged["mnt_salario"]
+    ).fillna(0).round(2) * 100
+    
    
     # 3.8  Guardar resultado en Excel
     excel_out = Path(PATHS["excel"])
